@@ -12,7 +12,7 @@ export const ContentLayout = () => {
         <Header className="header">
           <HeaderMenu />
         </Header>
-        <Content>
+        <Content className="content">
           <Outlet />
         </Content>
       </Layout>
