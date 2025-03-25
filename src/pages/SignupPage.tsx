@@ -1,5 +1,6 @@
-import React from "react";
+import React from 'react';
+import { SignupPanel } from '../components/SignupPanel/SignupPanel';
 
 export const SignupPage = () => {
-  return <div>Signup page</div>;
+  return <SignupPanel />;
 };
