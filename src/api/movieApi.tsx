@@ -11,3 +11,4 @@ export const getMovieById = async () => {
   console.log('res', res);
   return res;
 };
+
