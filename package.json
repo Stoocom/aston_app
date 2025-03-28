@@ -5,6 +5,7 @@
   "dependencies": {
     "@ant-design/icons": "^6.0.0",
     "@ant-design/v5-patch-for-react-19": "^1.0.3",
+    "@hookform/resolvers": "^4.1.3",
     "@reduxjs/toolkit": "^2.6.1",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
@@ -15,14 +16,17 @@
     "@types/react": "^19.0.12",
     "@types/react-dom": "^19.0.4",
     "antd": "^5.24.4",
+    "immutability-helper": "^3.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-hook-form": "^7.54.2",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.4.0",
     "react-scripts": "^5.0.1",
     "sass": "^1.86.0",
     "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yup": "^1.6.1"
   },
   "scripts": {
     "start": "react-scripts start",
