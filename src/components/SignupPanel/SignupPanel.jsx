@@ -1,10 +1,18 @@
+import React from 'react';
 import { Input, Tooltip, Space, Button, Checkbox } from 'antd';
 import { Validation } from '../Validation/Validation';
 
-export const SignupPanel = () => {
+export const SignupPanel = React.memo(() => {
   return (
     <Validation>
-      {({ formData, errors, disabledButton, onFieldChange, handleSubmit }) => (
+      {({
+        formData,
+        errors,
+        disabledButton,
+        isSubmitted,
+        onFieldChange,
+        handleSubmit,
+      }) => (
         <form onSubmit={handleSubmit}>
           <Space direction="vertical">
             <Space.Compact block>
@@ -22,7 +30,7 @@ export const SignupPanel = () => {
                 />
               </Tooltip>
             </Space.Compact>
-            {errors.login && (
+            {isSubmitted && errors.login && (
               <span style={{ color: 'red' }}>{errors.login}</span>
             )}
 
@@ -41,7 +49,7 @@ export const SignupPanel = () => {
                 />
               </Tooltip>
             </Space.Compact>
-            {errors.password && (
+            {isSubmitted && errors.password && (
               <span style={{ color: 'red' }}>{errors.password}</span>
             )}
 
@@ -55,7 +63,7 @@ export const SignupPanel = () => {
                 value={formData.confirmPassword}
               />
             </Space.Compact>
-            {errors.confirmPassword && (
+            {isSubmitted && errors.confirmPassword && (
               <span style={{ color: 'red' }}>{errors.confirmPassword}</span>
             )}
 
@@ -66,7 +74,7 @@ export const SignupPanel = () => {
             >
               Согласие на обработку персональных данных
             </Checkbox>
-            {errors.agreement && (
+            {isSubmitted && errors.agreement && (
               <span style={{ color: 'red' }}>{errors.agreement}</span>
             )}
 
@@ -78,4 +86,4 @@ export const SignupPanel = () => {
       )}
     </Validation>
   );
-};
+});

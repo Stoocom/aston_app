@@ -1,5 +1,5 @@
-import React from 'react';
+import { SigninPanel } from '../components/SigninPanel/SigninPanel';
 
 export const SigninPage = () => {
-  return <div>Signin page</div>;
+  return <SigninPanel />;
 };
