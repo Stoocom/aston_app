@@ -16,8 +16,10 @@
     "@types/react": "^19.0.12",
     "@types/react-dom": "^19.0.4",
     "antd": "^5.24.4",
+    "lodash": "^4.17.21",
     "immutability-helper": "^3.1.1",
     "react": "^19.0.0",
+    "react-content-loader": "^7.0.2",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.2",
     "react-redux": "^9.2.0",
@@ -53,6 +55,7 @@
     ]
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.16",
     "ajv": "^8.17.1",
     "ajv-keywords": "^5.1.0",
     "prettier": "^3.5.3"

@@ -1,23 +1,35 @@
-import React from 'react';
+import React, {useCallback} from 'react';
+import { useDispatch } from 'react-redux';
+import { setSearchValue } from '../../store/searchSlice';
 import './SearchPanel.scss';
-import { Input, Space } from 'antd';
+import { Input } from 'antd';
 import { SearchProps } from 'antd/es/input';
 import { FilterOutlined } from '@ant-design/icons';
+import debounce from 'lodash/debounce';
 const { Search } = Input;
+
 
 export const SearchPanel = () => {
   const onSearch: SearchProps['onSearch'] = (value, _e, info) => {
     console.log(info?.source, value);
   };
+  const dispatch = useDispatch();
 
+
+  const debouncedSearchChange = useCallback(
+    debounce((value: string) => {
+      dispatch(setSearchValue(value));
+    }, 400),
+    [dispatch]
+  );
+  
   const iconPress = () => {
     console.log('iconPress');
   };
 
-  const handleSearchChange = () => {
-    console.log('handleSearchChange');
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    debouncedSearchChange(e.target.value);
   };
-
   return (
     <>
       <Search
@@ -32,7 +44,7 @@ export const SearchPanel = () => {
             style={{ fontSize: 24, color: '#bfc6d3' }}
           />
         }
-        onChange={handleSearchChange}
+        onChange={(e) => handleSearchChange(e)}
         onSearch={onSearch}
       />
     </>
