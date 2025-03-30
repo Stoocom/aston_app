@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import update from 'immutability-helper';
 import * as yup from 'yup';
+import { LocalStorage } from '../LocalStorage/LocalStorage';
 
 // Схема валидации
 const formSchema = yup.object().shape({
@@ -34,6 +35,7 @@ const formSchema = yup.object().shape({
 });
 
 export const Validation = ({ children }) => {
+  const { saveUser } = LocalStorage();
   const [formData, setFormData] = useState({
     login: '',
     password: '',
@@ -86,6 +88,7 @@ export const Validation = ({ children }) => {
       await validateForm();
       if (Object.keys(errors).length === 0 && formData.agreement) {
         console.log('Всё ок, форма отправлена');
+        saveUser(formData.login, formData.password);
       }
     },
   });
