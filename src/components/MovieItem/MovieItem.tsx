@@ -2,14 +2,14 @@ import styles from './MovieItem.module.scss';
 import { Button } from 'antd';
 
 interface MovieItemProps {
-  primaryTitle: string;
+  title: string;
   primaryImage: string | null;
   startYear: number | null;
   averageRating: number;
 }
 
 function MovieItem({
-  primaryTitle,
+  title,
   primaryImage,
   startYear,
   averageRating,
@@ -18,8 +18,8 @@ function MovieItem({
     <>
       {primaryImage && (
         <div className={styles.movie}>
-          <h3 className={styles.movie__title}>{primaryTitle}</h3>
-          <img src={primaryImage} alt={primaryTitle} />
+          <h3 className={styles.movie__title}>{title}</h3>
+          <img src={primaryImage} alt={title} />
           <div className={styles.movie__info}>
             <p className={styles.movie__year}>{startYear}</p>
             <p className={styles.movie__rating}>IMDb: {averageRating}</p>

@@ -2,10 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface FilterState {
   genre: string;
+  country: string;
 }
 
 const initialState: FilterState = {
   genre: '',
+  country: '',
 };
 
 const filterSlice = createSlice({
@@ -15,8 +17,11 @@ const filterSlice = createSlice({
     setGenre: (state, action: PayloadAction<string>) => {
       state.genre = action.payload;
     },
+    setCountry:(state, action: PayloadAction<string>) => {
+      state.country = action.payload;
+    }
   },
 });
 
-export const { setGenre } = filterSlice.actions;
+export const { setGenre, setCountry} = filterSlice.actions;
 export default filterSlice.reducer;
