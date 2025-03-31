@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styles from './MovieItem.module.scss';
 import { Button } from 'antd';
 
@@ -24,9 +25,11 @@ function MovieItem({
             <p className={styles.movie__year}>{startYear}</p>
             <p className={styles.movie__rating}>IMDb: {averageRating}</p>
           </div>
-          <Button color="danger" variant="solid">
-            Подробнее
-          </Button>
+          <Link to="/movie" className="custom_big" state={{ title, primaryImage, startYear, averageRating }}>
+            <Button color="danger" variant="solid">
+              Подробнее
+            </Button>
+          </Link>
         </div>
       )}
     </>

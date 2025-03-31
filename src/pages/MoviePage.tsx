@@ -1,16 +1,19 @@
 import { useLayoutEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { MovieDetails } from '../types';
+import { MovieItemProps } from '../types/movie';
+import { Typography } from 'antd';
+
+const { Title, Paragraph } = Typography;
 
 export const MoviePage = () => {
   const location = useLocation();
-  const [movieDetails, setMovieDetails] = useState<MovieDetails | undefined>();
+  const [movieDetails, setMovieDetails] = useState<MovieItemProps | undefined>();
 
   useLayoutEffect(() => {
     if (location.state) {
       setMovieDetails(location.state);
     }
-  }, []);
+  }, [location.state]);
 
   if (!movieDetails) {
     return <div>Нет информации для видео/сериала</div>;
@@ -18,25 +21,22 @@ export const MoviePage = () => {
 
   return (
     <>
-      <div>Информация о видео</div>
-      <p>
+      <Title level={2}>Информация о видео</Title>
+      <Title level={3}>
         Название:
-        {movieDetails.originalTitleAutocomplete
-          ? ' ' + movieDetails.originalTitleAutocomplete
+        {movieDetails.title
+          ? ' ' + movieDetails.title
           : '-'}
-      </p>
-      <p>
-        Тип:
-        {movieDetails.type ? ' ' + movieDetails.type : '-'}
-      </p>
-      <p>
-        Жанр:
-        {movieDetails.genres ? ' ' + movieDetails.genres : '-'}
-      </p>
-      <p>
+      </Title>
+      { movieDetails.primaryImage && <img style={{ width: '50%'}}src={movieDetails.primaryImage} alt={movieDetails.title} /> }
+      <Paragraph>
+        Рейтинг:
+        {movieDetails.averageRating ? ' ' + movieDetails.averageRating : '-'}
+      </Paragraph>
+      <Paragraph>
         Публикация:
-        {movieDetails.startYearFrom ? ' ' + movieDetails.startYearFrom : '-'}
-      </p>
+        {movieDetails.startYear ? ' ' + movieDetails.startYear : '-'}
+      </Paragraph>
     </>
   );
 };

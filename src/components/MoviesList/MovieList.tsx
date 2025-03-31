@@ -26,7 +26,7 @@ function MovieList() {
   const skeleton = [...Array(8)].map((_, index) => <Skeleton key={index} />);
   return (
     <div>
-      {loading == 'error' ? (
+      {loading === 'error' ? (
         <div>
           <p>Ошибка при загрузке фильмов</p>
         </div>
