@@ -2,10 +2,12 @@ import React from 'react';
 import { Input, Tooltip, Space, Button, Checkbox, notification } from 'antd';
 import { Validation } from '../Validation/Validation';
 import { LocalStorage } from '../LocalStorage/LocalStorage';
+import { useNavigate } from 'react-router-dom';
 
 export const SignupPanel = React.memo(() => {
   const [api, contextHolder] = notification.useNotification();
-  const { saveUser } = LocalStorage();
+  const { saveUser, setCurrentUser } = LocalStorage();
+  const navigate = useNavigate();
   const tooltipText = {
     login: 'От 3 до 10 символов, только латинские буквы и цифры',
     password: 'Мин. 8 символов, заглавная буква, цифра, спецсимвол',
@@ -30,6 +32,9 @@ export const SignupPanel = React.memo(() => {
               message: 'Регистрация прошла успешно',
               placement: 'bottomRight',
             });
+            setCurrentUser(data.login);
+            document.dispatchEvent(new Event('userChanged')); // Триггер обновления
+            navigate('/');
           }
         };
 
