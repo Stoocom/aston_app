@@ -63,7 +63,10 @@ export const Validation = ({ children }) => {
       setErrors({});
     } catch (err) {
       const newErrors = err.inner.reduce((acc, error) => {
-        acc[error.path] = error.message;
+        if (!acc[error.path]) {
+          acc[error.path] = [];
+        }
+        acc[error.path].push(error.message);
         return acc;
       }, {});
       setErrors(newErrors);

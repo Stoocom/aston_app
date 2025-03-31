@@ -44,7 +44,11 @@ export const SignupPanel = React.memo(() => {
               </Tooltip>
             </Space.Compact>
             {isSubmitted && errors.login && (
-              <span style={{ color: 'red' }}>{errors.login}</span>
+              <div style={{ color: 'red' }}>
+                {errors.login.map((err, index) => (
+                  <div key={index}>{err}</div>
+                ))}
+              </div>
             )}
 
             <Space.Compact block>
@@ -63,7 +67,11 @@ export const SignupPanel = React.memo(() => {
               </Tooltip>
             </Space.Compact>
             {isSubmitted && errors.password && (
-              <span style={{ color: 'red' }}>{errors.password}</span>
+              <div style={{ color: 'red' }}>
+                {errors.password.map((err, index) => (
+                  <div key={index}>{err}</div>
+                ))}
+              </div>
             )}
 
             <Space.Compact block style={{ width: 'calc(100% - 25px)' }}>
