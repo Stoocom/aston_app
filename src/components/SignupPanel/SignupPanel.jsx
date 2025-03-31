@@ -1,8 +1,21 @@
 import React from 'react';
-import { Input, Tooltip, Space, Button, Checkbox } from 'antd';
+import { Input, Tooltip, Space, Button, Checkbox, notification } from 'antd';
 import { Validation } from '../Validation/Validation';
 
 export const SignupPanel = React.memo(() => {
+  const [api, contextHolder] = notification.useNotification();
+  const tooltipText = {
+    login: 'От 3 до 10 символов, только латинские буквы и цифры',
+    password: 'Мин. 8 символов, заглавная буква, цифра, спецсимвол',
+  };
+
+  const openNotification = () => {
+    api.open({
+      message: 'Регистрация прошла успешно',
+      placement: 'bottomRight',
+    });
+  };
+
   return (
     <Validation>
       {({
@@ -22,7 +35,7 @@ export const SignupPanel = React.memo(() => {
                 name="login"
                 value={formData.login}
               />
-              <Tooltip title="Минимум 3 символа" placement="bottom">
+              <Tooltip title={tooltipText.login} placement="bottom">
                 <img
                   src="/info.svg"
                   style={{ width: '25px', height: '25px' }}
@@ -41,7 +54,7 @@ export const SignupPanel = React.memo(() => {
                 name="password"
                 value={formData.password}
               />
-              <Tooltip title="Минимум 8 символов" placement="bottom">
+              <Tooltip title={tooltipText.password} placement="bottom">
                 <img
                   src="/info.svg"
                   style={{ width: '25px', height: '25px' }}
@@ -78,7 +91,13 @@ export const SignupPanel = React.memo(() => {
               <span style={{ color: 'red' }}>{errors.agreement}</span>
             )}
 
-            <Button type="primary" htmlType="submit" disabled={disabledButton}>
+            {contextHolder}
+            <Button
+              type="primary"
+              htmlType="submit"
+              disabled={disabledButton}
+              onClick={openNotification}
+            >
               Регистрация
             </Button>
           </Space>
