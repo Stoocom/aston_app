@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Input, Space, Button } from 'antd';
 import { LocalStorage } from '../LocalStorage/LocalStorage';
 import { useNavigate } from 'react-router-dom';
+import styles from './SigninPanel.module.scss';
 
 export const SigninPanel = () => {
   const { getUser, setCurrentUser } = LocalStorage();
@@ -32,7 +33,7 @@ export const SigninPanel = () => {
 
   return (
     <>
-      <form>
+      <form className={styles.form}>
         <Space direction="vertical">
           <Input
             placeholder="логин"

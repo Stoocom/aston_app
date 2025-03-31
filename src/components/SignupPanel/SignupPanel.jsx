@@ -3,6 +3,7 @@ import { Input, Tooltip, Space, Button, Checkbox, notification } from 'antd';
 import { Validation } from '../Validation/Validation';
 import { LocalStorage } from '../LocalStorage/LocalStorage';
 import { useNavigate } from 'react-router-dom';
+import styles from './SignupPanel.module.scss';
 
 export const SignupPanel = React.memo(() => {
   const [api, contextHolder] = notification.useNotification();
@@ -39,9 +40,12 @@ export const SignupPanel = React.memo(() => {
         };
 
         return (
-          <form onSubmit={(event) => handleSubmit(event, handleFormSubmit)}>
+          <form
+            className={styles.form}
+            onSubmit={(event) => handleSubmit(event, handleFormSubmit)}
+          >
             <Space direction="vertical">
-              <Space.Compact block>
+              <Space.Compact block className={styles.center}>
                 <Input
                   placeholder="логин"
                   onChange={(e) => onFieldChange('login', e.target.value)}
@@ -51,20 +55,20 @@ export const SignupPanel = React.memo(() => {
                 <Tooltip title={tooltipText.login} placement="bottom">
                   <img
                     src="/info.svg"
-                    style={{ width: '25px', height: '25px' }}
+                    className={styles.img}
                     alt="info_login"
                   />
                 </Tooltip>
               </Space.Compact>
               {isSubmitted && errors.login && (
-                <div style={{ color: 'red' }}>
+                <div className={styles.errors}>
                   {errors.login.map((err, index) => (
                     <div key={index}>{err}</div>
                   ))}
                 </div>
               )}
 
-              <Space.Compact block>
+              <Space.Compact block className={styles.center}>
                 <Input.Password
                   placeholder="пароль"
                   onChange={(e) => onFieldChange('password', e.target.value)}
@@ -74,13 +78,13 @@ export const SignupPanel = React.memo(() => {
                 <Tooltip title={tooltipText.password} placement="bottom">
                   <img
                     src="/info.svg"
-                    style={{ width: '25px', height: '25px' }}
+                    className={styles.img}
                     alt="info_password"
                   />
                 </Tooltip>
               </Space.Compact>
               {isSubmitted && errors.password && (
-                <div style={{ color: 'red' }}>
+                <div className={styles.errors}>
                   {errors.password.map((err, index) => (
                     <div key={index}>{err}</div>
                   ))}
@@ -98,7 +102,7 @@ export const SignupPanel = React.memo(() => {
                 />
               </Space.Compact>
               {isSubmitted && errors.confirmPassword && (
-                <span style={{ color: 'red' }}>{errors.confirmPassword}</span>
+                <span className={styles.errors}>{errors.confirmPassword}</span>
               )}
 
               <Checkbox
@@ -109,7 +113,7 @@ export const SignupPanel = React.memo(() => {
                 Согласие на обработку персональных данных
               </Checkbox>
               {isSubmitted && errors.agreement && (
-                <span style={{ color: 'red' }}>{errors.agreement}</span>
+                <span className={styles.errors}>{errors.agreement}</span>
               )}
 
               {contextHolder}

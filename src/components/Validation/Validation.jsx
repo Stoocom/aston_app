@@ -64,7 +64,7 @@ export const Validation = ({ children }) => {
         if (!acc[error.path]) {
           acc[error.path] = [];
         }
-        acc[error.path].push(error.message);
+        acc[error.path].push(`- ${error.message}`);
         return acc;
       }, {});
       setErrors(newErrors);
