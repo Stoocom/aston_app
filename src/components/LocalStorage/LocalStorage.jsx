@@ -19,8 +19,23 @@ export const LocalStorage = () => {
     );
   };
 
+  const setCurrentUser = (login) => {
+    localStorage.setItem('currentUser', login);
+  };
+
+  const getCurrentUser = () => {
+    return localStorage.getItem('currentUser');
+  };
+
+  const logout = () => {
+    localStorage.removeItem('currentUser');
+  };
+
   return {
     saveUser,
     getUser,
+    setCurrentUser,
+    getCurrentUser,
+    logout,
   };
 };

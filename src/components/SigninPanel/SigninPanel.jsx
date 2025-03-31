@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Input, Space, Button } from 'antd';
 import { LocalStorage } from '../LocalStorage/LocalStorage';
+import { useNavigate } from 'react-router-dom';
 
 export const SigninPanel = () => {
-  const { getUser } = LocalStorage();
+  const { getUser, setCurrentUser } = LocalStorage();
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleLoginChange = (e) => {
     setLogin(e.target.value);
@@ -17,11 +19,12 @@ export const SigninPanel = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     const user = getUser(login, password);
-
     if (user) {
       console.log('Вход выполнен успешно');
+      setCurrentUser(login);
+      document.dispatchEvent(new Event('userChanged')); // Триггер обновления
+      navigate('/');
     } else {
       console.log('Проблема со входом');
     }
