@@ -5,11 +5,11 @@ export const LocalStorage = () => {
     const users = getUsers();
 
     if (users.some((user) => user.login === login)) {
-      alert('Пользователь с таким логином уже существует.');
-      return;
+      return 'Пользователь с таким логином уже существует';
     }
     users.push({ login, password });
     localStorage.setItem('users', JSON.stringify(users));
+    return null;
   };
 
   const getUser = (login, password) => {
