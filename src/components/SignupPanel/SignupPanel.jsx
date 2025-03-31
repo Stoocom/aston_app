@@ -27,12 +27,13 @@ export const SignupPanel = React.memo(() => {
         const handleFormSubmit = async (data) => {
           const error = saveUser(data.login, data.password);
           if (error) {
-            api.error({ message: error, placement: 'bottomRight', icon: null });
-          } else {
-            api.open({
-              message: 'Регистрация прошла успешно',
+            api.error({
+              message: error,
               placement: 'bottomRight',
+              icon: null,
+              className: styles.popUpError,
             });
+          } else {
             setCurrentUser(data.login);
             document.dispatchEvent(new Event('userChanged')); // Триггер обновления
             navigate('/');
