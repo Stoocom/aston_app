@@ -4,3 +4,9 @@ export interface MovieItemProps {
     startYear: number | null;
     averageRating: number;
 }
+
+export interface FetchMoviesParams {
+    searchValue?: string;
+    genre?: string;
+    country?: string;
+}

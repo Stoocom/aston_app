@@ -1,45 +1,17 @@
 import { LinkOutlined } from '@ant-design/icons';
 import { List, Modal } from 'antd';
-import { useState } from 'react';
-import { HistoryRequestItem } from '../types';
+import { useEffect, useState } from 'react';
+import { getObjectFromLocalStorageByKey } from '../api/localStorage';
+import { FetchMoviesParams } from '../types/movie';
+import { Typography } from 'antd';
 
-const arrayTest: HistoryRequestItem[] = [
-  {
-    title: 'Test1',
-    queryParams: {
-      originalTitleAutocomplete: 'Test1',
-      primaryTitleAutocomplete: 'Test1',
-      type: 'movie',
-      genres: 'Drama',
-      startYearFrom: '10.01.2020',
-    },
-  },
-  {
-    title: 'Test2',
-    queryParams: {
-      originalTitleAutocomplete: 'Test2',
-      primaryTitleAutocomplete: 'Test2',
-      type: 'movie',
-      genres: 'Drama',
-      startYearFrom: '10.01.2020',
-    },
-  },
-  {
-    title: 'Test3',
-    queryParams: {
-      originalTitleAutocomplete: 'Test3',
-      primaryTitleAutocomplete: 'Test3',
-      type: 'movie',
-      genres: 'Drama',
-      startYearFrom: '10.01.2022',
-    },
-  },
-];
+const { Title } = Typography;
 
 export const HistoryPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [requestlist, setRequestList] = useState<FetchMoviesParams[]>([]);
   const [currentRequest, setCurrentRequest] =
-    useState<HistoryRequestItem | null>(null);
+    useState<FetchMoviesParams | null>(null);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -53,32 +25,29 @@ export const HistoryPage = () => {
     setIsModalOpen(false);
   };
 
-  const transformQueryParamsToString = (obj: any) => {
-    if (!obj) {
-      return '';
+  useEffect(() => {
+    const data: FetchMoviesParams[] = getObjectFromLocalStorageByKey("searchHistory")
+    console.log("searchHistory", data);
+    if (Array.isArray(data) && data.length > 0) {
+      setRequestList(data);
     }
+  }, [])
 
-    let commonStr = '';
-    for (let key in obj) {
-      commonStr += `${key} - ${obj[key]}; `;
-    }
-    return commonStr;
-  };
+  console.log("requestlist", requestlist)
 
   return (
     <>
-      <div>История запросов</div>
-      {arrayTest && arrayTest.length > 0 && (
+      <Title level={3}>История запросов</Title>
+      {requestlist && requestlist.length > 0 && (
         <List
           itemLayout="horizontal"
           size="large"
           style={{ marginTop: 10 }}
-          dataSource={arrayTest}
-          renderItem={(item, index) => (
+          dataSource={requestlist}
+          renderItem={(item: FetchMoviesParams) => (
             <List.Item
               style={{ cursor: 'pointer' }}
               onClick={() => {
-                console.log('onClick');
                 setCurrentRequest(item);
                 showModal();
               }}
@@ -86,8 +55,8 @@ export const HistoryPage = () => {
               <List.Item.Meta
                 avatar={<LinkOutlined />}
                 style={{ alignItems: 'center' }}
-                title={item.title}
-                description={transformQueryParamsToString(item.queryParams)}
+                // title={item.title}
+                description={`Текст поиска: ${item.searchValue ? item.searchValue : '-'}, жанр: ${item.genre ? item.genre : '-'}, страна: ${item.country ? item.country : '-'}`}
               />
             </List.Item>
           )}
@@ -99,20 +68,17 @@ export const HistoryPage = () => {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        {currentRequest?.queryParams.originalTitleAutocomplete && (
+        {currentRequest?.searchValue && (
           <p>
             Текст поиска:{' '}
-            {currentRequest?.queryParams.originalTitleAutocomplete}
+            {currentRequest?.searchValue}
           </p>
         )}
-        {currentRequest?.queryParams.type && (
-          <p>Тип: {currentRequest?.queryParams.type}</p>
+        {currentRequest?.genre && (
+          <p>Жанр: {currentRequest?.genre}</p>
         )}
-        {currentRequest?.queryParams.genres && (
-          <p>Жанр: {currentRequest?.queryParams.genres}</p>
-        )}
-        {currentRequest?.queryParams.startYearFrom && (
-          <p>Год: {currentRequest?.queryParams.startYearFrom}</p>
+        {currentRequest?.country && (
+          <p>Страна: {currentRequest?.country}</p>
         )}
       </Modal>
     </>
