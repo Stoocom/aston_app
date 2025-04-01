@@ -13,7 +13,7 @@ export const HeaderMenu = () => {
 
     document.addEventListener('userChanged', updateUser);
     return () => document.removeEventListener('userChanged', updateUser);
-  }, []);
+  }, [getCurrentUser]);
 
   const handleLogout = () => {
     logout();

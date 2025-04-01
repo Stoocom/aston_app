@@ -7,13 +7,13 @@ import { ContentLayout } from './pages/ContentLayout';
 import { MainPage } from './pages/MainPage';
 import { HistoryPage } from './pages/HistoryPage';
 import { MoviePage } from './pages/MoviePage';
-import { useSelector } from 'react-redux';
-import { RootState } from './store';
-import { JSX } from 'react'
+import { JSX } from 'react';
+import { LocalStorage } from './components/LocalStorage/LocalStorage';
 
 const PrivateRoute = ({ children }: { children: JSX.Element}) => {
-  const { auth } = useSelector((state: RootState) => state.profile);
-  return auth ? children : <Navigate to="/" replace />;
+  const { getCurrentUser } = LocalStorage();
+  const login = getCurrentUser();
+  return login ? children : <Navigate to="/" replace />;
 };
 
 function App() {
