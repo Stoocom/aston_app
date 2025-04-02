@@ -1,13 +1,13 @@
-import React, {useCallback} from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { setSearchValue } from '../../store/searchSlice';
 import './SearchPanel.scss';
-import { Input } from 'antd';
+import { Input, Button } from 'antd';
 import { SearchProps } from 'antd/es/input';
 import { FilterOutlined } from '@ant-design/icons';
 import debounce from 'lodash/debounce';
 const { Search } = Input;
-
 
 export const SearchPanel = () => {
   const onSearch: SearchProps['onSearch'] = (value, _e, info) => {
@@ -15,14 +15,13 @@ export const SearchPanel = () => {
   };
   const dispatch = useDispatch();
 
-
   const debouncedSearchChange = useCallback(
     debounce((value: string) => {
       dispatch(setSearchValue(value));
     }, 400),
     [dispatch]
   );
-  
+
   const iconPress = () => {
     console.log('iconPress');
   };
@@ -31,7 +30,7 @@ export const SearchPanel = () => {
     debouncedSearchChange(e.target.value);
   };
   return (
-    <>
+    <div className="search">
       <Search
         placeholder="Например: Нападение пришельцев"
         enterButton="Поиск"
@@ -47,6 +46,11 @@ export const SearchPanel = () => {
         onChange={(e) => handleSearchChange(e)}
         onSearch={onSearch}
       />
-    </>
+      <Link to="/favorites">
+        <Button className="button" type="primary">
+          Избранное
+        </Button>
+      </Link>
+    </div>
   );
 };

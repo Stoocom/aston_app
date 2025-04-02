@@ -1,12 +1,32 @@
 .movie {
   width: 260px;
   height: 580px;
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   &__title {
-    margin-top: 0;
+    margin: 0;
     height: 50px;
     font-size: 18px;
+    display: flex;
+    align-items: center;
+  }
+  &__icon {
+    font-size: 26px;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+  &__liked {
+    color: rgb(235, 110, 110);
   }
   img {
+    margin-top: 20px;
     width: 100%;
     height: 350px;
     object-fit: cover;

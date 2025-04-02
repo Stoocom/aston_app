@@ -7,7 +7,7 @@ interface FetchMoviesParams {
 }
 
 interface Movie {
-  id: string;
+  id: number;
   title: string;
   startYear: number | null;
   primaryImage: string;

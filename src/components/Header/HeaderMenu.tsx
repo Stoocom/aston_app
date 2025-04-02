@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Flex } from 'antd';
+import { HomeOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import { LocalStorage } from '../LocalStorage/LocalStorage';
 import './HeaderMenu.scss';
@@ -24,7 +25,7 @@ export const HeaderMenu = () => {
   return (
     <Flex justify="space-between">
       <Link to="/" className="custom_big">
-        Лого
+        <HomeOutlined />
       </Link>
       <Flex gap="large">
         {currentUser ? (

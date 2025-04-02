@@ -8,3 +8,14 @@
   font-size: 26px;
   color: #bfc6d3;
 }
+
+.search {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.button {
+  height: 55px;
+  font-size: 20px;
+}

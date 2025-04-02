@@ -1,4 +1,3 @@
-import React from 'react';
 import FilterPanel from '../components/FilterPanel/FilterPanel';
 import MovieList from '../components/MoviesList/MovieList';
 import { SearchPanel } from '../components/SearchPanel/SearchPanel';
