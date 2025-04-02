@@ -1,20 +1,18 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Авторы проекта:
 
-## Available Scripts
+Елисеев Александр: 
+    - общая структура с роутами, 
+    - страницы MoviePage (/movie) и HistoryPage (/history)
+
 
 In the project directory, you can run:
 
+### `npm install` with condition node >= 18
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
+You can create build:
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+
