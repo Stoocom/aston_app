@@ -1,11 +1,12 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Input, Space, Button } from 'antd';
 import { LocalStorage } from '../LocalStorage/LocalStorage';
 import { useNavigate } from 'react-router-dom';
 import styles from './SigninPanel.module.scss';
 
 export const SigninPanel = () => {
-  const { setCurrentUser } = LocalStorage();
+  const storage = useMemo(() => LocalStorage(), []);
+  const { setCurrentUser } = storage;
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');

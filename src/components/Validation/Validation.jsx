@@ -1,8 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
-import update from 'immutability-helper';
 import * as yup from 'yup';
 
-// Схема валидации
 const formSchema = yup.object().shape({
   login: yup
     .string()
@@ -45,16 +43,10 @@ export const Validation = ({ children }) => {
   const [disabledButton, setDisabledButton] = useState(true);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // Обновление полей формы
   const onFieldChange = useCallback((fieldName, value) => {
-    setFormData((prevValues) =>
-      update(prevValues, {
-        [fieldName]: { $set: value },
-      })
-    );
+    setFormData((prevValues) => ({ ...prevValues, [fieldName]: value }));
   }, []);
 
-  // Валидация формы
   const validateForm = useCallback(async () => {
     try {
       await formSchema.validate(formData, { abortEarly: false });
@@ -72,7 +64,6 @@ export const Validation = ({ children }) => {
     setDisabledButton(!formData.agreement);
   }, [formData]);
 
-  // Вызываем валидацию при изменении формы
   useEffect(() => {
     validateForm();
   }, [formData, validateForm]);
@@ -86,7 +77,7 @@ export const Validation = ({ children }) => {
     handleSubmit: async (event, onSuccess) => {
       event.preventDefault();
       setIsSubmitted(true);
-      await validateForm();
+      validateForm();
       if (Object.keys(errors).length === 0 && formData.agreement) {
         onSuccess(formData);
       }

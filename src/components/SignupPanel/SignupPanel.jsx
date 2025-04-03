@@ -1,13 +1,14 @@
-import React from 'react';
+import { useMemo } from 'react';
 import { Input, Tooltip, Space, Button, Checkbox, notification } from 'antd';
 import { Validation } from '../Validation/Validation';
 import { LocalStorage } from '../LocalStorage/LocalStorage';
 import { useNavigate } from 'react-router-dom';
 import styles from './SignupPanel.module.scss';
 
-export const SignupPanel = React.memo(() => {
+export const SignupPanel = () => {
   const [api, contextHolder] = notification.useNotification();
-  const { saveUser, setCurrentUser } = LocalStorage();
+  const storage = useMemo(() => LocalStorage(), []);
+  const { saveUser, setCurrentUser } = storage;
   const navigate = useNavigate();
   const tooltipText = {
     login: 'От 3 до 10 символов, только латинские буквы и цифры',
@@ -131,4 +132,4 @@ export const SignupPanel = React.memo(() => {
       }}
     </Validation>
   );
-});
+};
