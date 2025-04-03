@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { MovieItemProps } from '../types/movie';
 import { Typography } from 'antd';
@@ -9,7 +9,7 @@ export const MoviePage = () => {
   const location = useLocation();
   const [movieDetails, setMovieDetails] = useState<MovieItemProps | undefined>();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (location.state) {
       setMovieDetails(location.state);
     }
