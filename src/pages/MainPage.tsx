@@ -1,21 +1,14 @@
-import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import FilterPanel from '../components/FilterPanel/FilterPanel';
+import MovieList from '../components/MoviesList/MovieList';
+import { SearchPanel } from '../components/SearchPanel/SearchPanel';
 
 export const MainPage = () => {
   return (
     <>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/one">Page One</Link>
-          </li>
-          <li>
-            <Link to="/two">Page Two</Link>
-          </li>
-        </ul>
-      </nav>
-      <hr />
-      <Outlet />
+      <div>Сервис по поиску фильма</div>
+      <SearchPanel />
+      <FilterPanel />
+      <MovieList />
     </>
   );
 };
